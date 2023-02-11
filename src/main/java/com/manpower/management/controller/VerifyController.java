@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("/verify")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+//@CrossOrigin("*")
 public class VerifyController {
     @Autowired
     VerifyRepository verifyRepository;
@@ -22,6 +24,7 @@ public class VerifyController {
 
     @PostMapping("/posts")
     VerifyEntity newPost(@RequestBody VerifyEntity newTrainee) {
+      System.out.println("method checked");
         return verifyRepository.save(newTrainee);
     }
 

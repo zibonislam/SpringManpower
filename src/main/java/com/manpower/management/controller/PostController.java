@@ -13,34 +13,43 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-//@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+//@CrossOrigin("*")
 public class PostController {
     @Autowired
     PostRepository postRepository;
 
     // Aggregate root
     // tag::get-aggregate-root[]
-    @GetMapping("/posts")
-    List<PostEntity> all() {
-        return postRepository.findAll();
-    }
-    // end::get-aggregate-root[]
+//    @GetMapping("/posts")
+//    List<PostEntity> all() {
+//        return postRepository.findAll();
+//    }
+//    // end::get-aggregate-root[]
 
-    @PostMapping("/posts")
+    @PostMapping("/admission/posts")
     PostEntity newPost(@RequestBody PostEntity newTrainee) {
-        return postRepository.save(newTrainee);
+      System.out.println("test Hit");
+
+      return postRepository.save(newTrainee);
     }
 
+
+  @GetMapping("/admission/posts")
+  List<PostEntity> getAll() {
+    System.out.println("test Hit");
+
+    return postRepository.findAll();
+  }
     // Single item
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/admission/posts/{id}")
     PostEntity one(@PathVariable Long id) {
         Optional<PostEntity> postEntity =  postRepository.findById(id);
         return postEntity.get();
     }
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("/admission/posts/{id}")
     PostEntity replaceEmployee(@RequestBody PostEntity postEntity, @PathVariable Long id) {
 
         return postRepository.findById(id)
@@ -60,7 +69,7 @@ public class PostController {
                 });
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/admission/posts/{id}")
     void deleteTrainee(@PathVariable Long id) {
         postRepository.deleteById(id);
     }
