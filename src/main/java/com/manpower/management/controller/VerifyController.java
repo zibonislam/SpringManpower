@@ -1,6 +1,6 @@
 package com.manpower.management.controller;
 
-import com.manpower.management.entity.PostEntity;
+
 import com.manpower.management.entity.VerifyEntity;
 import com.manpower.management.repository.VerifyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +10,19 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/verify")
+@RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 //@CrossOrigin("*")
 public class VerifyController {
     @Autowired
     VerifyRepository verifyRepository;
-    @GetMapping("/posts")
+    @GetMapping("/verify/posts")
     List<VerifyEntity> all() {
         return verifyRepository.findAll();
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/posts")
+    @PostMapping("/verify/posts")
     VerifyEntity newPost(@RequestBody VerifyEntity newTrainee) {
       System.out.println("method checked");
         return verifyRepository.save(newTrainee);
@@ -30,13 +30,13 @@ public class VerifyController {
 
     // Single item
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/verify/posts/{id}")
     VerifyEntity one(@PathVariable Long id) {
         Optional<VerifyEntity> verifyEntity =  verifyRepository.findById(id);
         return verifyEntity.get();
     }
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("verify/posts/{id}")
     VerifyEntity replacetrainee(@RequestBody VerifyEntity verifyEntity, @PathVariable Long id) {
 
         return verifyRepository.findById(id)
@@ -54,7 +54,7 @@ public class VerifyController {
                 });
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/verify/posts/{id}")
     void deleteTrainee(@PathVariable Long id) {
         verifyRepository.deleteById(id);
     }

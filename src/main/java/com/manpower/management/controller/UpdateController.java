@@ -1,9 +1,9 @@
 package com.manpower.management.controller;
 
-import com.manpower.management.entity.PostEntity;
+
 import com.manpower.management.entity.UpdateEntity;
-import com.manpower.management.repository.PostRepository;
 import com.manpower.management.repository.UpdateRepository;
+import com.manpower.management.service.UpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +17,9 @@ public class UpdateController {
   @Autowired
   UpdateRepository updateRepository;
 
-  // Aggregate root
-  // tag::get-aggregate-root[]
-//    @GetMapping("/posts")
-//    List<PostEntity> all() {
-//        return postRepository.findAll();
-//    }
-//    // end::get-aggregate-root[]
+  @Autowired
+  UpdateService updateService;
+
 
   @PostMapping("/update/posts")
   UpdateEntity newupdate(@RequestBody UpdateEntity newTrainee) {
@@ -76,4 +72,10 @@ public class UpdateController {
   void deleteTrainee(@PathVariable Long id) {
     updateRepository.deleteById(id);
   }
+
+  @GetMapping("/get/{id}")
+  public Optional<UpdateEntity> find(@PathVariable long id){
+      return updateService.findById(id);
+  }
+
 }
