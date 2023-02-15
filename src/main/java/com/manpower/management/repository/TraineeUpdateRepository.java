@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface TraineeUpdateRepository extends JpaRepository<TraineeUpdateEntity, Long> {
+//  Optional<TraineeUpdateEntity>
 
     Optional<TraineeUpdateEntity> findById(long id);
 }
