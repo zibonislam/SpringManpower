@@ -19,13 +19,6 @@ public class PostController {
     @Autowired
     PostRepository postRepository;
 
-    // Aggregate root
-    // tag::get-aggregate-root[]
-//    @GetMapping("/posts")
-//    List<PostEntity> all() {
-//        return postRepository.findAll();
-//    }
-//    // end::get-aggregate-root[]
 
     @PostMapping("/admission/posts")
     PostEntity newPost(@RequestBody PostEntity newTrainee) {
