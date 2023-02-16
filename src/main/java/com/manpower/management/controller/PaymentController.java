@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 
 public class PaymentController {
     @Autowired
@@ -62,5 +62,9 @@ public class PaymentController {
                     return paymentRepository.save(paymentEntity);
                 });
     }
+  @DeleteMapping("/payment/posts/{id}")
+  void delete(@PathVariable Long id) {
+    paymentRepository.deleteById(id);
+  }
 
 }
