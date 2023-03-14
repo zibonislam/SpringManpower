@@ -17,26 +17,26 @@ public class JobController {
     @Autowired
     JobRepository jobRepository;
 
-    @PostMapping("/job/post")
+    @PostMapping("/job/posts")
     JobEntity newJob(@RequestBody JobEntity newJob) {
         System.out.println("test Hit");
 
         return jobRepository.save(newJob);
     }
 
-    @GetMapping("/job/get")
+    @GetMapping("/job/posts")
     List<JobEntity> getAll() {
         System.out.println("test Hit");
 
         return jobRepository.findAll();
     }
-    @GetMapping("/job/get/{id}")
+    @GetMapping("/job/posts/{id}")
     JobEntity one(@PathVariable Long id) {
         Optional<JobEntity> jobEntity =  jobRepository.findById(id);
         return jobEntity.get();
     }
 
-    @PutMapping("/job/put/{id}")
+    @PutMapping("/job/posts/{id}")
     JobEntity job(@RequestBody JobEntity jobEntity, @PathVariable Long id) {
 
         return jobRepository.findById(id)
@@ -58,7 +58,7 @@ public class JobController {
                     return jobRepository.save(jobEntity);
                 });
     }
-    @DeleteMapping("/job/delete/{id}")
+    @DeleteMapping("/job/posts/{id}")
     void delete(@PathVariable Long id) {
         jobRepository.deleteById(id);
     }
